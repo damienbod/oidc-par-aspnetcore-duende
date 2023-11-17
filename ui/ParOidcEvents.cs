@@ -6,6 +6,11 @@ using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 
 namespace WebCodeFlowPkceClient;
 
+/// <summary>
+/// original code src:
+/// https://github.com/DuendeSoftware/IdentityServer
+/// </summary>
+
 public class ParOidcEvents(HttpClient httpClient, IDiscoveryCache discoveryCache, ILogger<ParOidcEvents> logger, IConfiguration configuration) : OpenIdConnectEvents
 {
     private readonly HttpClient _httpClient = httpClient;
