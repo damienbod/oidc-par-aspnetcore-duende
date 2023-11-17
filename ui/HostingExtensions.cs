@@ -38,7 +38,6 @@ internal static class HostingExtensions
             options.Scope.Clear();
             options.Scope.Add("openid");
             options.Scope.Add("profile");
-            options.Scope.Add("scope-dpop");
             options.Scope.Add("offline_access");
             options.GetClaimsFromUserInfoEndpoint = true;
             options.SaveTokens = true;
