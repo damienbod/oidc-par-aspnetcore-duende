@@ -398,3 +398,4 @@ FodyWeavers.xsd
 *.sln.iml
 /_logs-**
 /identityserver/keys
+/identityserver/AspIdUsers.db-shm
