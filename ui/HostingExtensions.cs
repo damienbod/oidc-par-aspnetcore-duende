@@ -18,7 +18,9 @@ internal static class HostingExtensions
         _env = builder.Environment;
 
         services.AddTransient<ParOidcEvents>();
-        services.AddSingleton<IDiscoveryCache>(_ => new DiscoveryCache("https://localhost:5001"));
+        services.AddSingleton<IDiscoveryCache>(_ => 
+            new DiscoveryCache(configuration["OidcDuende:Authority"]!));
+
         services.AddHttpClient();
 
         services.AddAuthentication(options =>
