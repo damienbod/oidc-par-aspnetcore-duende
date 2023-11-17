@@ -11,3 +11,5 @@ https://github.com/DuendeSoftware/IdentityServer
 [OAuth 2.0 Authorization Framework: JWT-Secured Authorization Request (JAR) RFC 9101](https://datatracker.ietf.org/doc/rfc9101/)
 
 [OAuth 2.0 Rich Authorization Requests (RAR) RFC 9396](https://datatracker.ietf.org/doc/html/rfc9396)
+
+https://www.youtube.com/watch?v=fE11HJRCL-k
