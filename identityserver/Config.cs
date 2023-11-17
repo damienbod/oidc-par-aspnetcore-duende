@@ -25,6 +25,8 @@ public static class Config
                 ClientId = "web-par",
                 ClientSecrets = { new Secret("ddedF4f289k$3eDa23ed0iTk4Raq&tttk23d08nhzd".Sha256()) },
 
+                RequirePushedAuthorization = true,
+
                 AllowedGrantTypes = GrantTypes.CodeAndClientCredentials,
 
                 RedirectUris = { "https://localhost:5007/signin-oidc" },

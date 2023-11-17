@@ -41,6 +41,7 @@ internal static class HostingExtensions
             options.Scope.Add("offline_access");
             options.GetClaimsFromUserInfoEndpoint = true;
             options.SaveTokens = true;
+            options.MapInboundClaims = false;
 
             options.TokenValidationParameters = new TokenValidationParameters
             {
