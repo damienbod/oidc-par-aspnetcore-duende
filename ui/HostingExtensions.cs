@@ -1,9 +1,10 @@
+using IdentityModel.Client;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.IdentityModel.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Cryptography.X509Certificates;
 
 namespace WebCodeFlowPkceClient;
 
@@ -16,21 +17,30 @@ internal static class HostingExtensions
         var configuration = builder.Configuration;
         _env = builder.Environment;
 
+        services.AddTransient<ParOidcEvents>();
+        services.AddSingleton<IDiscoveryCache>(_ => new DiscoveryCache("https://localhost:5001"));
+        services.AddHttpClient();
+
         services.AddAuthentication(options =>
         {
-            options.DefaultScheme = "cookie";
-            options.DefaultChallengeScheme = "oidc";
+            options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
         })
-        .AddCookie("cookie", options =>
+        .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
         {
             options.ExpireTimeSpan = TimeSpan.FromHours(8);
             options.SlidingExpiration = false;
+            options.Events.OnSigningOut = async e =>
+            {
+                // automatically revoke refresh token at signout time
+                await e.HttpContext.RevokeRefreshTokenAsync();
+            };
         })
-        .AddOpenIdConnect("oidc", options =>
+        .AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, options =>
         {
-            options.Authority = "https://localhost:5001";
-            options.ClientId = "web-par";
-            options.ClientSecret = "ddedF4f289k$3eDa23ed0iTk4Raq&tttk23d08nhzd";
+            options.Authority = configuration["OidcDuende:Authority"];
+            options.ClientId = configuration["OidcDuende:ClientId"];
+            options.ClientSecret = configuration["OidcDuende:ClientSecret"];
             options.ResponseType = "code";
             options.ResponseMode = "query";
             options.UsePkce = true;
@@ -43,6 +53,9 @@ internal static class HostingExtensions
             options.SaveTokens = true;
             options.MapInboundClaims = false;
 
+            // needed to add PAR support
+            options.EventsType = typeof(ParOidcEvents);
+
             options.TokenValidationParameters = new TokenValidationParameters
             {
                 NameClaimType = "name",
@@ -50,21 +63,10 @@ internal static class HostingExtensions
             };
         });
 
-        var privatePem = File.ReadAllText(Path.Combine(_env.ContentRootPath,
-            "ecdsa384-private.pem"));
-        var publicPem = File.ReadAllText(Path.Combine(_env.ContentRootPath,
-            "ecdsa384-public.pem"));
-        var ecdsaCertificate = X509Certificate2.CreateFromPem(publicPem, privatePem);
-        var ecdsaCertificateKey = new ECDsaSecurityKey(ecdsaCertificate.GetECDsaPrivateKey());
-
-        //var privatePem = File.ReadAllText(Path.Combine(_environment.ContentRootPath, 
-        //    "rsa256-private.pem"));
-        //var publicPem = File.ReadAllText(Path.Combine(_environment.ContentRootPath, 
-        //    "rsa256-public.pem"));
-        //var rsaCertificate = X509Certificate2.CreateFromPem(publicPem, privatePem);
-        //var rsaCertificateKey = new RsaSecurityKey(rsaCertificate.GetRSAPrivateKey());
-
         services.AddRazorPages();
+
+        // add automatic token management
+        services.AddOpenIdConnectAccessTokenManagement();
 
         return builder.Build();
     }
