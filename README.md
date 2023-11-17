@@ -1,5 +1,6 @@
-# OAUTH PAR with Duende IdentityServer
+# ASP.NET Core OIDC using OAUTH PAR and Duende IdentityServer
 
+[![.NET](https://github.com/damienbod/oidc-par-aspnetcore-duende/actions/workflows/dotnet.yml/badge.svg)](https://github.com/damienbod/oidc-par-aspnetcore-duende/actions/workflows/dotnet.yml)
 
 ## Links
 
