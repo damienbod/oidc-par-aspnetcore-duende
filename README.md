@@ -2,6 +2,8 @@
 
 [![.NET](https://github.com/damienbod/oidc-par-aspnetcore-duende/actions/workflows/dotnet.yml/badge.svg)](https://github.com/damienbod/oidc-par-aspnetcore-duende/actions/workflows/dotnet.yml)
 
+![PAR](https://github.com/damienbod/oidc-par-aspnetcore-duende/blob/main/images/oauth-par-oidc_01.png)
+
 ## Links
 
 https://github.com/DuendeSoftware/IdentityServer
