@@ -6,6 +6,10 @@
 
 ![PAR](https://github.com/damienbod/oidc-par-aspnetcore-duende/blob/main/images/oauth-par-oidc_01.png)
 
+## History
+
+- 2024-01-05 Updated packages
+
 ## Links
 
 https://github.com/DuendeSoftware/IdentityServer
