@@ -8,6 +8,7 @@
 
 ## History
 
+- 2024-06-22 Updated packages
 - 2024-01-05 Updated packages
 
 ## Links
