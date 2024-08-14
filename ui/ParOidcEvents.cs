@@ -103,7 +103,7 @@ public class ParOidcEvents(HttpClient httpClient, IDiscoveryCache discoveryCache
             throw new Exception(disco.Error);
         }
 
-        var parEndpoint = disco.TryGetValue("pushed_authorization_request_endpoint").GetString();
+        var parEndpoint = disco.TryGetValue("pushed_authorization_request_endpoint").ToString();
         var response = await _httpClient.PostAsync(parEndpoint, requestBody);
         
         if (!response.IsSuccessStatusCode)
