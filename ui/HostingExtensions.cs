@@ -1,5 +1,5 @@
-using IdentityModel.Client;
-using Microsoft.AspNetCore.Authentication;
+//using IdentityModel.Client;
+//using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.IdentityModel.Logging;
@@ -17,9 +17,9 @@ internal static class HostingExtensions
         var configuration = builder.Configuration;
         _env = builder.Environment;
 
-        services.AddTransient<ParOidcEvents>();
-        services.AddSingleton<IDiscoveryCache>(_ => 
-            new DiscoveryCache(configuration["OidcDuende:Authority"]!));
+        //services.AddTransient<ParOidcEvents>();
+        //services.AddSingleton<IDiscoveryCache>(_ => 
+        //    new DiscoveryCache(configuration["OidcDuende:Authority"]!));
 
         services.AddHttpClient();
 
@@ -32,11 +32,11 @@ internal static class HostingExtensions
         {
             options.ExpireTimeSpan = TimeSpan.FromHours(8);
             options.SlidingExpiration = false;
-            options.Events.OnSigningOut = async e =>
-            {
-                // automatically revoke refresh token at signout time
-                await e.HttpContext.RevokeRefreshTokenAsync();
-            };
+            //options.Events.OnSigningOut = async e =>
+            //{
+            //    // automatically revoke refresh token at signout time
+            //    await e.HttpContext.RevokeRefreshTokenAsync();
+            //};
         })
         .AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, options =>
         {
@@ -55,9 +55,8 @@ internal static class HostingExtensions
             options.SaveTokens = true;
             options.MapInboundClaims = false;
 
-            // needed to add PAR support
-            options.EventsType = typeof(ParOidcEvents);
-
+            options.PushedAuthorizationBehavior = PushedAuthorizationBehavior.Require;
+ 
             options.TokenValidationParameters = new TokenValidationParameters
             {
                 NameClaimType = "name",
@@ -68,7 +67,7 @@ internal static class HostingExtensions
         services.AddRazorPages();
 
         // add automatic token management
-        services.AddOpenIdConnectAccessTokenManagement();
+        //services.AddOpenIdConnectAccessTokenManagement();
 
         return builder.Build();
     }
