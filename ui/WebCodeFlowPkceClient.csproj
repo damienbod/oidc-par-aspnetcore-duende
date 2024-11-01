@@ -8,9 +8,9 @@
 
   <ItemGroup>
     <PackageReference Include="Duende.AccessTokenManagement.OpenIdConnect" Version="3.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="9.0.0-preview.7.24406.2" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0-preview.7.24405.7" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="9.0.0-preview.7.24413.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="9.0.0-rc.2.24474.3" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0-rc.2.24473.5" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="9.0.0-rc.2.24508.2" />
     <PackageReference Include="Serilog.AspNetCore" Version="8.0.3" />
   </ItemGroup>
 
