@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.IdentityModel.Logging;
@@ -9,12 +8,10 @@ namespace WebCodeFlowPkceClient;
 
 internal static class HostingExtensions
 {
-    private static IWebHostEnvironment? _env;
     public static WebApplication ConfigureServices(this WebApplicationBuilder builder)
     {
         var services = builder.Services;
         var configuration = builder.Configuration;
-        _env = builder.Environment;
 
         services.AddHttpClient();
 
@@ -51,7 +48,7 @@ internal static class HostingExtensions
             options.MapInboundClaims = false;
 
             options.PushedAuthorizationBehavior = PushedAuthorizationBehavior.Require;
- 
+
             options.TokenValidationParameters = new TokenValidationParameters
             {
                 NameClaimType = "name",
@@ -66,14 +63,14 @@ internal static class HostingExtensions
 
         return builder.Build();
     }
-    
+
     public static WebApplication ConfigurePipeline(this WebApplication app)
     {
         IdentityModelEventSource.ShowPII = true;
 
         app.UseSerilogRequestLogging();
 
-        if (_env!.IsDevelopment())
+        if (app.Environment.IsDevelopment())
         {
             app.UseDeveloperExceptionPage();
         }
