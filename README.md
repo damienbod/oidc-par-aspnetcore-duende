@@ -8,6 +8,7 @@
 
 ## History
 
+- 2025-01-05 Updated packages, .NET 9, Bootstrap 5
 - 2024-10-21 Updated packages
 - 2024-08-15 WebCodeFlowPkceClient .NET 9 par client
 - 2024-08-14 Updated packages
