@@ -399,3 +399,5 @@ FodyWeavers.xsd
 /_logs-**
 /identityserver/keys
 /identityserver/AspIdUsers.db-shm
+
+/identityserver/keys/**
