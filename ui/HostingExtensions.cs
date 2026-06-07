@@ -54,6 +54,18 @@ internal static class HostingExtensions
                 NameClaimType = "name",
                 RoleClaimType = "role"
             };
+
+            options.Events.OnRedirectToIdentityProvider = context =>
+            {
+                context.ProtocolMessage.SetParameter("myredirect", "fr");
+                return Task.CompletedTask;
+            };
+            options.Events.OnPushAuthorization = context =>
+            {
+                context.ProtocolMessage.SetParameter("mypar", "fr");
+                return Task.CompletedTask;
+            };
+
         });
 
         services.AddRazorPages();
