@@ -8,7 +8,7 @@
 
 ## History
 
-- 2026-06-07 Üpdate packages
+- 2026-06-07 Üpdate packages, Duende 8.0.0
 - 2026-03-15 Üpdate packages
 - 2025-12-01 .NET 10
 - 2025-05-28 Updated packages
