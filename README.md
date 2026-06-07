@@ -7,6 +7,8 @@
 ![PAR](https://github.com/damienbod/oidc-par-aspnetcore-duende/blob/main/images/oauth-par-oidc_01.png)
 
 ## History
+
+- 2026-06-07 Üpdate packages
 - 2026-03-15 Üpdate packages
 - 2025-12-01 .NET 10
 - 2025-05-28 Updated packages
